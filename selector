@@ -17,9 +17,10 @@ for path in sys.argv[1:]:
 for k,v in stats.items():
     v.sort()
 
+minProb = 0.5
+maxProb = 2.0
 
 for k,v in stats.items():
-    print(k + " -> " + str(v) )
-    if v[0] > v[-1]:
-        print("DUPA!")
-        sys.exit(42)
+    avg = sum(v) / float(len(v))
+    if minProb <= avg and avg <= maxProb:
+        print(k + " -> " + str(avg) + "  " + str(v) )
