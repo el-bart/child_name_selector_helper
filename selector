@@ -1,26 +1,55 @@
 #!/usr/bin/env python
 import sys
 
-stats = {}
-
+# read input data
+data = []
 for path in sys.argv[1:]:
     with open(path) as f:
         for line in f.readlines():
-            data = line.rstrip().split(' ')
-            k = data[0]
-            v = float(data[2])
-            if data[0] in stats:
-                stats[k].append(v)
-            else:
-                stats[k] = [v]
+            tab = line.rstrip().split(',')
+            entry = [ tab[0], int(tab[1]), int(tab[2]) ]
+            data.append(entry)
 
+# add probabilities for a given name, per year
+years = []
+for e in data:
+    years.append(e[1])
+years = set(years)
+
+# compute sum of all names, per year
+yearSum = {}
+for e in data:
+    year = e[1]
+    count = e[2]
+    if year in yearSum:
+        yearSum[year] += count
+    else:
+        yearSum[year] = count
+
+# add percentage probability on a given name, per year
+for e in data:
+    e.append( e[2]/float(yearSum[e[1]])*100 )
+
+# compute per-name statistics
+stats = {}
+for e in data:
+    name = e[0]
+    p = e[3]
+    if name in stats:
+        stats[name].append(p)
+    else:
+        stats[name] = [p]
+
+# sort probabilities for each year, to keep some, common ordering
 for k,v in stats.items():
     v.sort()
 
+# acceptable probabilities
 minProb = 0.5
 maxProb = 2.0
 
 for k,v in stats.items():
     avg = sum(v) / float(len(v))
-    if minProb <= avg and avg <= maxProb:
-        print(k + " -> " + str(avg) + "  " + str(v) )
+    med = v[ len(v)/2 ]
+    if minProb <= med and med <= maxProb:
+        print( k + " -> median " + str(med) + " average " + str(avg) ) #+ " data = " + str(v) )
