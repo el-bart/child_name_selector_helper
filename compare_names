@@ -30,7 +30,7 @@ esac
 echo "$PLOTS"
 
 gnuplot -p <<EOF
-set title '$NAME - $OYAXIS name plot'
+set title '$OYAXIS name comparison plot'
 set xlabel 'year'
 set ylabel 'birth count'
 $OYRANGE
