@@ -8,7 +8,7 @@ APP_DIR=$(dirname "$(readlink -e "$0")")
 
 DATA=$("$APP_DIR/selector" "$@")
 
-echo "$DATA"
+sort -k 4 <<< "$DATA"
 
 NAMES=$(awk '{ print $1 }' <<<"$DATA")
 for name in $NAMES
