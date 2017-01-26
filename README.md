@@ -10,8 +10,8 @@ the aim is to select a name that is neither too popular (i.e. non-distinguishabl
 
 python scripts should run on any machine, that has python 2.7 interpreter installed.
 
-for shell scripts you will need linux.
-if you don't, your options are: virtual machine with linux, docker for windows, bash for windows.s
+for shell scripts you will need linux with bash and gnuplot installed.
+if you don't, your options are: virtual machine with linux, docker for windows, bash for windows.
 
 
 ## selector
