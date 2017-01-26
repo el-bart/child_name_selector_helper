@@ -6,6 +6,14 @@ set of scripts, that help to choose a reasonable name for a child, thanks to usa
 the aim is to select a name that is neither too popular (i.e. non-distinguishable) nor too uncommon (i.e. does not appear to be "from a different times").
 
 
+## system requirements
+
+python scripts should run on any machine, that has python 2.7 interpreter installed.
+
+for shell scripts you will need linux.
+if you don't, your options are: virtual machine with linux, docker for windows, bash for windows.s
+
+
 ## selector
 
 python script for selecting names, that match given probability criteria.
@@ -64,9 +72,23 @@ example relative plot for name "bartosz":
 
 ## analyze_all
 
-script that displays all the results for a given query.
+shell script that displays all the results for a given query.
 for each name a separate window is opened, displaying per-name results.
 
 example call, for percentage between 1.2% and 2.3%, plotted with relative values, follows:
 
 `./analyze_all "myinputdata.csv 1.2 2.3 relative`
+
+
+## compare_names
+
+shell script that plots multiple names trends, on a single plot.
+it is useful for doing analysis between different options.
+
+example run, plotting 4 names, follows:
+
+`./compare_names input/male.csv relative BARTOSZ JAKUB ANTONI KAJETAN`
+
+which results in a following plot:
+
+![name comparing plot](pic/name_comparison_example.png)
