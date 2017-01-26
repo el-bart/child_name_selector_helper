@@ -14,7 +14,12 @@ for shell scripts you will need linux with bash and gnuplot installed.
 if you don't, your options are: virtual machine with linux, docker for windows, bash for windows.
 
 
-## selector
+## tools
+
+project consists of tools, that can help you select and visualize certain pieces of information.
+
+
+### selector
 
 python script for selecting names, that match given probability criteria.
 for instance selecting name that is probable from 0.7% to 2.5%, based on males name, can be done like this:
@@ -45,7 +50,7 @@ example results from name "bartosz", and name percentage between 1.0% and 1.8%:
     ADRIAN  ->  median  1.19791952321  average  1.1153006219
 
 
-## plot_name
+### plot_name
 
 shell script for plotting popularity of a given name in time.
 requires bash and gnuplot to work.
@@ -70,7 +75,7 @@ example relative plot for name "bartosz":
 ![relative plot](pic/bartosz_relative.png)
 
 
-## analyze_all
+### analyze_all
 
 shell script that displays all the results for a given query.
 for each name a separate window is opened, displaying per-name results.
@@ -80,7 +85,7 @@ example call, for percentage between 1.2% and 2.3%, plotted with relative values
 `./analyze_all "myinputdata.csv 1.2 2.3 relative`
 
 
-## compare_names
+### compare_names
 
 shell script that plots multiple names trends, on a single plot.
 it is useful for doing analysis between different options.
