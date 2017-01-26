@@ -1,0 +1,17 @@
+#!/bin/bash -e
+if [ $# -ne 3 ]
+then
+  echo "$0 <input.csv> <p_min> <p_max>" >&2
+  exit 1
+fi
+APP_DIR=$(dirname "$(readlink -e "$0")")
+
+DATA=$("$APP_DIR/selector" "$@")
+
+echo "$DATA"
+
+NAMES=$(awk '{ print $1 }' <<<"$DATA")
+for name in $NAMES
+do
+  "$APP_DIR/plot_name" "$1" "$name" &> /dev/null
+done
