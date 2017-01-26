@@ -1,0 +1,27 @@
+#!/bin/bash -e
+
+if [ $# -ne 2 ]
+then
+  echo "$0 <input.csv> <name>" >&2
+  exit 1
+fi
+
+FILE=$1
+shift
+NAME=$(tr '[:lower:]' '[:upper:]' <<< "$1")
+shift
+
+DATA=$(mktemp)
+
+grep "$NAME," "$FILE" | awk -F ',' '{ print $2, $3 }' | sort -n > "$DATA"
+gnuplot -p <<EOF
+set title '$NAME name plot'
+set xlabel 'year'
+set ylabel 'birth count'
+
+plot \
+  "$DATA" using 1:2 title 'data points' ps 3, \
+  "$DATA" using 1:2 title 'trend' smooth csplines lw 3
+EOF
+
+rm -f "$DATA"
