@@ -13,5 +13,5 @@ sort -k 4 <<< "$DATA"
 NAMES=$(awk '{ print $1 }' <<<"$DATA")
 for name in $NAMES
 do
-  "$APP_DIR/plot_name" "$1" "$name" &> /dev/null
+  "$APP_DIR/plot_name" "$1" "$name" &> /dev/null || true
 done
