@@ -26,14 +26,6 @@ case "$OYAXIS" in
   ;;
 esac
 
-FIRST=true
-for name in "$@"
-do
-  grep "$name," "$FILE" | awk -F ',' '{ print $2, $3 }' | sort -n > "$DATA_DIR/${name}.dat"
-  $FIRST || PLOTS="$PLOTS , "
-  FIRST=false
-  PLOTS="$PLOTS '$DATA_DIR/${name}.dat' using 1:2 title '$name' smooth csplines lw 3"
-done
 
 echo "$PLOTS"
 
@@ -43,7 +35,20 @@ set xlabel 'year'
 set ylabel 'birth count'
 $OYRANGE
 
-plot $PLOTS
+plot \\
+$(
+FIRST=true
+for name in "$@"
+do
+  grep "$name," "$FILE" | awk -F ',' '{ print $2, $3 }' | sort -n > "$DATA_DIR/${name}.dat"
+  if ! $FIRST
+  then
+    echo ", \\"
+  fi
+  FIRST=false
+  echo -n "$NEWLINE '$DATA_DIR/${name}.dat' using 1:2 title '$name' smooth csplines lw 3"
+done
+)
 EOF
 
 rm -rf "$DATA_DIR"
