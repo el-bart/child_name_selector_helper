@@ -28,7 +28,7 @@ case "$OYAXIS" in
   ;;
 esac
 
-grep "$NAME," "$FILE" | awk -F ',' '{ print $2, $3 }' | sort -n > "$DATA"
+grep "^$NAME," "$FILE" | awk -F ',' '{ print $2, $3 }' | sort -n > "$DATA"
 gnuplot -p <<EOF
 set title '$NAME - $OYAXIS name plot'
 set xlabel 'year'

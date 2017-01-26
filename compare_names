@@ -40,7 +40,7 @@ $(
 FIRST=true
 for name in "$@"
 do
-  grep "$name," "$FILE" | awk -F ',' '{ print $2, $3 }' | sort -n > "$DATA_DIR/${name}.dat"
+  grep "^$name," "$FILE" | awk -F ',' '{ print $2, $3 }' | sort -n > "$DATA_DIR/${name}.dat"
   if ! $FIRST
   then
     echo ", \\"
